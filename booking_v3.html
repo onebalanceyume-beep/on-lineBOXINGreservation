@@ -474,7 +474,7 @@ body {
     </div>
     <div id="timeGrid" class="time-grid"></div>
     <button class="btn" id="toStep3" disabled>次へ進む</button>
-    <button class="btn btn-secondary" id="back1">日付を選び直す</button>
+    <button class="btn btn-secondary" id="back1">← 日付を選び直す</button>
   </div>
 
   <!-- STEP3: 情報入力 -->
@@ -486,25 +486,21 @@ body {
     </div>
     <div class="form-group">
       <label>お名前<span class="req">*必須</span></label>
-      <input type="text" id="name" placeholder="山田 太郎">
+      <input type="text" id="name" placeholder="例：福山 雅治">
     </div>
     <div class="form-group">
-      <label>LINE ID または LINE登録名<span class="req">*必須</span></label>
-      <input type="text" id="lineId" placeholder="例：yamada_taro">
-    </div>
-    <div class="form-group">
-      <label>メールアドレス<span class="req">*必須</span></label>
-      <input type="email" id="email" placeholder="example@email.com">
+      <label>LINE登録名<span class="req">*必須</span></label>
+      <input type="text" id="lineId" placeholder="例：福山雅治（LINEで使っているお名前）">
     </div>
     <div class="form-group">
       <label>年代<span class="req">*必須</span></label>
       <select id="age">
         <option value="">選択してください</option>
-        <option>40代前半</option>
-        <option>40代後半</option>
-        <option>50代前半</option>
-        <option>50代後半</option>
-        <option>その他</option>
+        <option>20代</option>
+        <option>30代</option>
+        <option>40代</option>
+        <option>50代</option>
+        <option>60代以上</option>
       </select>
     </div>
     <div class="form-group">
@@ -523,7 +519,7 @@ body {
     </div>
     <div id="formError" class="error"></div>
     <button class="btn" id="submit">仮予約を確定する</button>
-    <button class="btn btn-secondary" id="back2">時間を選び直す</button>
+    <button class="btn btn-secondary" id="back2">← 時間を選び直す</button>
   </div>
 
   <!-- STEP4: 完了 -->
@@ -556,6 +552,7 @@ body {
       <a href="#" id="lineLink" class="line-link" target="_blank">
         ② 公式LINEで連絡する →
       </a>
+      <button class="btn btn-secondary" id="backToTop" style="margin-top: 20px;">← 最初から予約し直す</button>
     </div>
   </div>
 
@@ -567,9 +564,9 @@ body {
 // 設定エリア（ここを書き換えるだけ）
 // ====================================================
 const CONFIG = {
-  GAS_URL: 'https://script.google.com/macros/s/XXXXXXXXX/exec',
-  BASE_PAYMENT_URL: 'https://yourshop.base.shop/items/XXXXXXX',
-  LINE_URL: 'https://lin.ee/XXXXXXX',
+  GAS_URL: 'https://script.google.com/macros/s/AKfycbxMj-rJWAsNiUr5XawVPkNdhHFnicHAtf24xTNhoVLjhTNZbj2OHo2b_gtUiyD5wXYp/exec',
+  BASE_PAYMENT_URL: 'https://onebalance.shopselect.net/items/143522384',
+  LINE_URL: 'https://lin.ee/xIshUR5',
   HOUR_START: 9,
   HOUR_END: 21,
   DAYS_AHEAD: 30,
@@ -718,6 +715,21 @@ document.getElementById('toStep3').onclick = () => {
 };
 document.getElementById('back1').onclick = () => showStep(1);
 document.getElementById('back2').onclick = () => showStep(2);
+document.getElementById('backToTop').onclick = () => {
+  // フォームリセット
+  document.getElementById('name').value = '';
+  document.getElementById('lineId').value = '';
+  document.getElementById('age').value = '';
+  document.getElementById('experience').value = '';
+  document.getElementById('message').value = '';
+  document.getElementById('formError').textContent = '';
+  document.getElementById('submit').disabled = false;
+  document.getElementById('submit').textContent = '仮予約を確定する';
+  selectedDate = null;
+  selectedHour = null;
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('selected'));
+  showStep(1);
+};
 
 function showStep(n) {
   for (let i = 1; i <= 4; i++) {
@@ -738,19 +750,14 @@ function showStep(n) {
 document.getElementById('submit').onclick = async () => {
   const name = document.getElementById('name').value.trim();
   const lineId = document.getElementById('lineId').value.trim();
-  const email = document.getElementById('email').value.trim();
   const age = document.getElementById('age').value;
   const experience = document.getElementById('experience').value;
   const message = document.getElementById('message').value.trim();
   const errorEl = document.getElementById('formError');
   errorEl.textContent = '';
 
-  if (!name || !lineId || !email || !age) {
+  if (!name || !lineId || !age) {
     errorEl.textContent = '* 必須項目を入力してください';
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errorEl.textContent = '* メールアドレスの形式が正しくありません';
     return;
   }
 
@@ -764,7 +771,7 @@ document.getElementById('submit').onclick = async () => {
     date: selectedDate,
     hour: selectedHour,
     slotLabel: slotLabel,
-    name, lineId, email, age, experience, message,
+    name, lineId, age, experience, message,
     timestamp: new Date().toISOString()
   };
 
