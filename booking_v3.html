@@ -528,35 +528,43 @@ body {
       <div class="check">✓</div>
       <h2>仮予約を受け付けました</h2>
       <div class="msg">
-        本予約の確定まで、あと2ステップです
+        本予約の確定まで、あと3ステップです<br>
+        <span style="color:#06C755;font-weight:600;">公式LINE上で全て完結</span>します
       </div>
 
-      <div class="flow-step">
-        <div class="num">1</div>
-        <div class="text">下のボタンからBASEで決済</div>
+      <div class="flow-step" style="border-color: #06C755; background: rgba(6,199,85,0.08);">
+        <div class="num" style="background: #06C755; color: #fff; border-color: #06C755;">1</div>
+        <div class="text"><span style="color:#06C755;font-weight:700;">下のボタンから公式LINEを追加</span><br><span style="font-size:11px;color:#999;">※登録すると決済URLが届きます</span></div>
       </div>
       <div class="flow-step">
         <div class="num">2</div>
-        <div class="text">公式LINEへ「決済済み」とご連絡</div>
+        <div class="text">LINEで届く決済URLからお支払い</div>
       </div>
       <div class="flow-step last">
         <div class="num">3</div>
-        <div class="text">確認後、Google Meet URLをお送りします</div>
+        <div class="text">決済確認後、Google Meet URLをLINEでお送りします</div>
       </div>
 
       <div class="booking-info" id="bookingInfo" style="margin-top: 20px;"></div>
       
-      <a href="#" id="paymentLink" class="payment-link" target="_blank">
-        ① BASEで決済する →
+      <a href="#" id="lineLink" class="line-link" target="_blank" style="font-size: 15px; padding: 20px;">
+        公式LINEを追加する →
       </a>
-      <a href="#" id="lineLink" class="line-link" target="_blank">
-        ② 公式LINEで連絡する →
-      </a>
+      
+      <div style="background: rgba(6,199,85,0.08); border: 1px dashed #06C755; border-radius: 8px; padding: 14px 16px; margin-top: 16px; text-align: left;">
+        <div style="color: #06C755; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 6px;">📢 大切なお知らせ</div>
+        <div style="color: #E0E0E0; font-size: 12px; line-height: 1.8;">
+          公式LINEのご登録後、<span style="color:#06C755;font-weight:600;">決済URLを直接お送りします</span>。<br>
+          そちらからお支払いをお願いいたします。<br>
+          <span style="color:#999; font-size:11px;">※LINE登録なしでは決済を進められません</span>
+        </div>
+      </div>
+      
       <button class="btn btn-secondary" id="backToTop" style="margin-top: 20px;">← 最初から予約し直す</button>
     </div>
   </div>
 
-  <div class="footer-note">WANBALANCE</div>
+  <div class="footer-note">ONE-BALANCE</div>
 </div>
 
 <script>
@@ -797,7 +805,6 @@ function showComplete(data) {
     <div><span class="label">NAME</span><span class="value">${data.name} 様</span></div>
     <div><span class="label">LINE</span><span class="value">${data.lineId}</span></div>
   `;
-  document.getElementById('paymentLink').href = CONFIG.BASE_PAYMENT_URL;
   document.getElementById('lineLink').href = CONFIG.LINE_URL;
   showStep(4);
 }
