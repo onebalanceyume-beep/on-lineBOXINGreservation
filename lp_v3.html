@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="オンライン個別指導">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>40代・50代から、ボクシングを"カッコいい"にする｜オンライン個別指導</title>
+<meta name="description" content="全日本実業団優勝・3階級制覇のプロが教える、40代・50代のための「理論で上達する」オンライン個別指導。限定5名・モニター特別価格5,500円。">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" href="logo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { width:100%; overflow-x:hidden; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic Medium', 'Noto Sans JP', sans-serif;
+  background: #2A2D31;
+  color: #E8E8E8;
+  -webkit-text-size-adjust: 100%;
+  background-image: linear-gradient(180deg, #2A2D31 0%, #1F2125 100%);
+  background-attachment: fixed;
+  line-height: 1.7;
+}
+img { max-width: 100%; display: block; }
+
+.lp-container { max-width: 720px; margin: 0 auto; }
+
+/* ===== ヒーロー ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 20px 80px;
+  text-align: center;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('hero.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.45) contrast(1.1);
+  z-index: 0;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(26,26,26,0.6) 0%, rgba(31,33,37,0.95) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+}
+.hero-accent {
+  width: 40px;
+  height: 2px;
+  background: #DB444C;
+  margin: 0 auto 30px;
+}
+.hero-badge {
+  display: inline-block;
+  border: 1px solid #DB444C;
+  color: #DB444C;
+  padding: 5px 16px;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  color: #F5F5F5;
+  margin-bottom: 18px;
+}
+.hero h1 span { color: #DB444C; }
+.hero-sub {
+  font-size: 13px;
+  color: #999;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.hero-tag {
+  font-size: 13px;
+  color: #C5C5C5;
+  letter-spacing: 0.05em;
+  margin-bottom: 36px;
+  line-height: 1.9;
+}
+.hero-cta {
+  display: inline-block;
+  background: #DB444C;
+  color: #fff;
+  padding: 16px 38px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s;
+  box-shadow: 0 6px 20px rgba(219,68,76,0.4);
+}
+.hero-cta:hover { background: #C13B43; }
+.hero-scroll {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #888;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  z-index: 1;
+}
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 24px;
+  background: #888;
+  margin: 8px auto 0;
+}
+
+/* ===== セクション共通 ===== */
+.section {
+  padding: 60px 20px;
+}
+.section-num {
+  font-size: 10px;
+  color: #DB444C;
+  letter-spacing: 0.3em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.section-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #F5F5F5;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+.section-title .accent { color: #DB444C; }
+
+/* ===== 共感 ===== */
+.empathy {
+  background: #1F2125;
+  padding: 60px 20px;
+}
+.empathy-list {
+  list-style: none;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.empathy-list li {
+  padding: 16px 18px;
+  background: #2A2D31;
+  border-left: 2px solid #DB444C;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #D5D5D5;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
+.empathy-list li::before {
+  content: '✓ ';
+  color: #DB444C;
+  font-weight: 700;
+  margin-right: 6px;
+}
+.empathy-conclusion {
+  text-align: center;
+  margin-top: 36px;
+  font-size: 16px;
+  color: #F5F5F5;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.empathy-conclusion .accent {
+  color: #DB444C;
+  font-size: 22px;
+  letter-spacing: 0.1em;
+}
+
+/* ===== プロフィール ===== */
+.profile {
+  background: #2A2D31;
+}
+.profile-img {
+  margin: 0 -20px 30px;
+  position: relative;
+}
+.profile-img img {
+  width: 100%;
+  filter: brightness(0.9);
+}
+.profile-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(31,33,37,0.95) 100%);
+}
+.achievements {
+  list-style: none;
+  max-width: 560px;
+  margin: 0 auto 28px;
+}
+.achievements li {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 0.5px solid #4A4D52;
+  color: #E0E0E0;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+}
+.achievements li:last-child { border-bottom: none; }
+.achievements li::before { display: none; }
+.ach-year {
+  color: #DB444C;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  width: 50px;
+  padding-top: 2px;
+}
+.ach-text {
+  color: #E5E5E5;
+  flex: 1;
+}
+.ach-note {
+  display: inline-block;
+  color: #5BB9CD;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+.profile-quote {
+  background: #35383D;
+  border-left: 3px solid #DB444C;
+  padding: 20px 22px;
+  margin: 28px auto 0;
+  max-width: 560px;
+  font-size: 15px;
+  color: #F0F0F0;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+.profile-text {
+  color: #C5C5C5;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-top: 20px;
+  letter-spacing: 0.04em;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== ミッション ===== */
+.mission {
+  background: #1F2125;
+  text-align: center;
+}
+.mission-conversions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  max-width: 480px;
+  margin: 30px auto 0;
+}
+.mission-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #2A2D31;
+  border: 1px solid #4A4D52;
+  border-radius: 4px;
+}
+.mission-from {
+  color: #888;
+  font-size: 14px;
+  text-decoration: line-through;
+  letter-spacing: 0.05em;
+  flex: 1;
+  text-align: right;
+}
+.mission-arrow {
+  color: #DB444C;
+  font-size: 14px;
+  font-weight: 700;
+}
+.mission-to {
+  color: #F5F5F5;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  flex: 1;
+  text-align: left;
+}
+
+/* ===== 3つの約束 ===== */
+.promises {
+  background: #2A2D31;
+}
+.promise-card {
+  background: #35383D;
+  border: 1px solid #4A4D52;
+  border-radius: 6px;
+  padding: 24px;
+  margin-bottom: 14px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.promise-num {
+  display: inline-block;
+  color: #DB444C;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.promise-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #F5F5F5;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+.promise-desc {
+  color: #C0C0C0;
+  font-size: 13px;
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+}
+
+/* ===== 指導イメージ ===== */
+.coaching {
+  background: #1F2125;
+  text-align: center;
+}
+.coaching-img {
+  margin: 24px -20px 0;
+}
+.coaching-img img {
+  width: 100%;
+  filter: brightness(0.85) contrast(1.05);
+}
+.coaching-caption {
+  margin-top: 20px;
+  color: #C0C0C0;
+  font-size: 13px;
+  line-height: 1.9;
+  font-style: italic;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== サービス詳細 ===== */
+.service {
+  background: #2A2D31;
+}
+.service-card {
+  background: linear-gradient(180deg, #35383D 0%, #2F3236 100%);
+  border: 1px solid #DB444C;
+  border-radius: 6px;
+  padding: 28px 24px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.service-headline {
+  text-align: center;
+  font-size: 16px;
+  color: #F5F5F5;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-bottom: 22px;
+  line-height: 1.6;
+}
+.service-headline .limit {
+  display: block;
+  color: #DB444C;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.service-row {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 0.5px solid #4A4D52;
+  font-size: 13px;
+}
+.service-row:last-child { border-bottom: none; }
+.service-label {
+  color: #888;
+  width: 80px;
+  flex-shrink: 0;
+  letter-spacing: 0.1em;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.service-value {
+  color: #F0F0F0;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+}
+.service-price {
+  text-align: center;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 0.5px solid #4A4D52;
+}
+.service-price-old {
+  color: #888;
+  font-size: 13px;
+  text-decoration: line-through;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+.service-price-now {
+  color: #DB444C;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.service-price-now .yen {
+  font-size: 14px;
+  margin-right: 2px;
+}
+.service-price-label {
+  color: #5BB9CD;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  margin-top: 6px;
+  font-weight: 600;
+}
+.service-conditions {
+  background: #1F2125;
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-top: 20px;
+  font-size: 11px;
+  color: #999;
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+}
+.service-conditions .head {
+  color: #5BB9CD;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+/* ===== 哲学 ===== */
+.philosophy {
+  background: #1F2125;
+  text-align: center;
+}
+.philosophy-img {
+  margin: 0 -20px 30px;
+}
+.philosophy-img img {
+  width: 100%;
+  filter: brightness(0.75) contrast(1.05);
+}
+.philosophy-quote {
+  font-family: 'Hiragino Mincho ProN', serif;
+  font-size: 18px;
+  color: #F0F0F0;
+  line-height: 1.9;
+  letter-spacing: 0.08em;
+  font-weight: 400;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.philosophy-author {
+  color: #5BB9CD;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  margin-top: 14px;
+  font-weight: 600;
+}
+.philosophy-text {
+  color: #B0B0B0;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-top: 28px;
+  letter-spacing: 0.04em;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== 流れ ===== */
+.flow {
+  background: #2A2D31;
+}
+.flow-step {
+  display: flex;
+  gap: 16px;
+  padding: 18px;
+  background: #35383D;
+  border: 1px solid #4A4D52;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.flow-num {
+  color: #DB444C;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  width: 36px;
+}
+.flow-content {
+  flex: 1;
+}
+.flow-title {
+  color: #F5F5F5;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.flow-desc {
+  color: #999;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+}
+
+/* ===== ファイナルCTA ===== */
+.final-cta {
+  background: linear-gradient(180deg, #1F2125 0%, #1A1C1F 100%);
+  text-align: center;
+  padding: 70px 20px;
+}
+.final-cta h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #F5F5F5;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.final-cta h2 span { color: #DB444C; }
+.final-cta-text {
+  color: #B0B0B0;
+  font-size: 13px;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  margin-bottom: 30px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.final-cta-btn {
+  display: inline-block;
+  background: #DB444C;
+  color: #fff;
+  padding: 18px 50px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(219,68,76,0.45);
+  transition: background 0.2s, transform 0.2s;
+}
+.final-cta-btn:hover { background: #C13B43; transform: translateY(-2px); }
+.final-cta-limit {
+  color: #DB444C;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  margin-top: 18px;
+  font-weight: 700;
+}
+
+/* ===== フッター ===== */
+.footer {
+  background: #1A1C1F;
+  text-align: center;
+  padding: 30px 20px 40px;
+  color: #555;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  border-top: 0.5px solid #2A2D31;
+}
+.footer .brand {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: #888;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* ===== フローティング予約ボタン（右下常時表示）===== */
+.floating-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background: #DB444C;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(219,68,76,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  animation: pulseCTA 2s ease-in-out infinite;
+}
+.floating-cta:hover {
+  background: #C13B43;
+  transform: translateY(-2px);
+}
+.floating-cta::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  display: inline-block;
+}
+@keyframes pulseCTA {
+  0%, 100% { box-shadow: 0 8px 24px rgba(219,68,76,0.5), 0 0 0 1px rgba(255,255,255,0.1); }
+  50% { box-shadow: 0 8px 32px rgba(219,68,76,0.8), 0 0 0 1px rgba(255,255,255,0.2); }
+}
+@media (max-width: 600px) {
+  .floating-cta {
+    bottom: 16px;
+    right: 16px;
+    padding: 12px 18px;
+    font-size: 12px;
+  }
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 26px; }
+  .section-title { font-size: 19px; }
+  .section { padding: 50px 18px; }
+  .empathy, .mission, .promises, .coaching, .service, .philosophy, .flow { padding: 50px 18px; }
+}
+
+/* PCで広い時のセンタリング */
+@media (min-width: 720px) {
+  .profile-img, .coaching-img, .philosophy-img { margin-left: 0; margin-right: 0; border-radius: 6px; overflow: hidden; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ヒーロー ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-accent"></div>
+    <div class="hero-badge">LIMITED 5 / モニター募集中</div>
+    <h1>40代・50代から、<br>ボクシングを<br><span>"カッコいい"にする。</span></h1>
+    <div class="hero-sub">40代・50代のための個別指導</div>
+    <div class="hero-tag">
+      理論で打つ。理論で動く。<br>
+      だから、年齢は関係ない。
+    </div>
+    <a href="https://onebalanceyume-beep.github.io/on-lineBOXINGreservation/booking_v3.html" class="hero-cta">予約する →</a>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<div class="lp-container">
+
+<!-- ===== 共感 ===== -->
+<section class="section empathy">
+  <div class="section-num">SECTION 01 / 共感</div>
+  <h2 class="section-title">こんな想い、<br>ありませんか？</h2>
+  <ul class="empathy-list">
+    <li>体を動かしたい。でも、ジムは若い人ばかりで居心地が悪い</li>
+    <li>せっかくやるなら、ちゃんと"上手くなりたい"</li>
+    <li>40代・50代から始めても、本当に上達できるのか知りたい</li>
+    <li>時間があまりないから、時間対効果高く技術を上げたい</li>
+  </ul>
+  <div class="empathy-conclusion">
+    その答えは、<br>
+    すべて<span class="accent">「YES」</span>です。
+  </div>
+</section>
+
+<!-- ===== プロフィール ===== -->
+<section class="section profile">
+  <div class="profile-img">
+    <img src="profile.jpg" alt="指導者プロフィール">
+  </div>
+  <div class="section-num">SECTION 02 / プロフィール</div>
+  <h2 class="section-title">指導するのは、<br><span class="accent">"積み重ねた者"</span>です。</h2>
+  
+  <ul class="achievements">
+    <li><span class="ach-year">2005</span><span class="ach-text">全日本実業団ボクシング選手権<br>バンタム級 優勝</span></li>
+    <li><span class="ach-year">2006</span><span class="ach-text">全日本実業団ボクシング選手権<br>フェザー級 優勝 ＆ MVP<br><span class="ach-note">（2階級制覇）</span></span></li>
+    <li><span class="ach-year">2006</span><span class="ach-text">全日本社会人選手権<br>バンタム級 優勝</span></li>
+    <li><span class="ach-year">2007</span><span class="ach-text">全日本実業団ボクシング選手権<br>ライト級 優勝 ＆ MVP<br><span class="ach-note">（3階級制覇・大会初）</span></span></li>
+  </ul>
+  
+  <div class="profile-quote">
+    「私は、最初から才能が<br>あったわけではありません。」
+  </div>
+  
+  <p class="profile-text">
+    人より遠回りした。<br>
+    人より考えた。<br>
+    人より、"なぜそうなるのか"を追求した。<br><br>
+    だからこそ、"できない人がどうすればできるようになるか"を、言語化して伝えることができます。
+  </p>
+</section>
+
+<!-- ===== ミッション ===== -->
+<section class="section mission">
+  <div class="section-num">SECTION 03 / ミッション</div>
+  <h2 class="section-title">ボクシングのイメージを、<br><span class="accent">革命する。</span></h2>
+  <div class="mission-conversions">
+    <div class="mission-row">
+      <span class="mission-from">コワイ</span>
+      <span class="mission-arrow">→</span>
+      <span class="mission-to">楽しい</span>
+    </div>
+    <div class="mission-row">
+      <span class="mission-from">辛い</span>
+      <span class="mission-arrow">→</span>
+      <span class="mission-to">カッコいい</span>
+    </div>
+    <div class="mission-row">
+      <span class="mission-from">厳しい</span>
+      <span class="mission-arrow">→</span>
+      <span class="mission-to">誇らしい</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3つの約束 ===== -->
+<section class="section promises">
+  <div class="section-num">SECTION 04 / 3つの約束</div>
+  <h2 class="section-title">あなたへの、<br><span class="accent">3つの約束。</span></h2>
+  
+  <div class="promise-card">
+    <div class="promise-num">01</div>
+    <div class="promise-title">理論で、納得していただく。</div>
+    <div class="promise-desc">全ての動きに「なぜ」があります。感覚論ではなく、論理で説明します。</div>
+  </div>
+  
+  <div class="promise-card">
+    <div class="promise-num">02</div>
+    <div class="promise-title">あなただけの、完全オーダーメイド。</div>
+    <div class="promise-desc">40分間、あなたの体・目的・悩みに100%向き合います。</div>
+  </div>
+  
+  <div class="promise-card">
+    <div class="promise-num">03</div>
+    <div class="promise-title">"できる"を、必ず一つお持ち帰りいただく。</div>
+    <div class="promise-desc">レッスン後、必ず一つ"昨日までの自分との違い"を感じていただけます。</div>
+  </div>
+</section>
+
+<!-- ===== 指導イメージ ===== -->
+<section class="section coaching">
+  <div class="section-num">SECTION 05 / 指導の様子</div>
+  <h2 class="section-title">"楽しい"が、<br><span class="accent">"カッコいい"</span>になる。</h2>
+  <div class="coaching-img">
+    <img src="coaching.jpg" alt="指導の様子">
+  </div>
+  <p class="coaching-caption">
+    一緒に、笑顔で、技術を磨く。<br>
+    それがボクシングの、本当の楽しさです。
+  </p>
+</section>
+
+<!-- ===== サービス詳細 ===== -->
+<section class="section service">
+  <div class="section-num">SECTION 06 / サービス詳細</div>
+  <h2 class="section-title">サービスの<br><span class="accent">中身。</span></h2>
+  
+  <div class="service-card">
+    <div class="service-headline">
+      <span class="limit">LIMITED 5 NAMES</span>
+      40-50代特化型<br>技術追求オンライン個別指導
+    </div>
+    
+    <div class="service-row">
+      <div class="service-label">FORMAT</div>
+      <div class="service-value">Google Meetを使用したオンライン個別指導</div>
+    </div>
+    <div class="service-row">
+      <div class="service-label">TIME</div>
+      <div class="service-value">40分間</div>
+    </div>
+    <div class="service-row">
+      <div class="service-label">CONTENT</div>
+      <div class="service-value">完全オーダーメイドのカウンセリング＆レッスン</div>
+    </div>
+    <div class="service-row">
+      <div class="service-label">DEVICE</div>
+      <div class="service-value">スマホ or PC、2畳程度のスペース</div>
+    </div>
+    <div class="service-row">
+      <div class="service-label">PAYMENT</div>
+      <div class="service-value">クレジットカード決済</div>
+    </div>
+    
+    <div class="service-price">
+      <div class="service-price-old">通常 ¥11,000</div>
+      <div class="service-price-now"><span class="yen">¥</span>5,500</div>
+      <div class="service-price-label">MONITOR SPECIAL PRICE</div>
+    </div>
+    
+    <div class="service-conditions">
+      <div class="head">モニター参加条件</div>
+      ・SNS・YouTube等での実績報告として<br>　掲載することにご同意いただける方<br>
+      ・終了後のアンケート・ご感想のご提出<br>
+      ・本気で上達したいという熱意
+    </div>
+  </div>
+</section>
+
+<!-- ===== 哲学 ===== -->
+<section class="section philosophy">
+  <div class="philosophy-img">
+    <img src="philosophy.jpg" alt="哲学">
+  </div>
+  <div class="section-num">SECTION 07 / 哲学</div>
+  <h2 class="section-title">私が、<br>大切にしている言葉。</h2>
+  
+  <div class="philosophy-quote">
+    "小さなことを積み重ねることが、<br>とんでもないところへ行く<br>ただ一つの道"
+  </div>
+  <div class="philosophy-author">── ICHIRO</div>
+  
+  <p class="philosophy-text">
+    でも、ただ"コツコツ"だけでは、<br>
+    オンラインで指導を受ける意味がありません。<br><br>
+    
+    そこに必要なのは、<span style="color:#DB444C;font-weight:600;">"質"</span>です。<br><br>
+    
+    同じことをみんなが続けるなかで、<br>
+    その動きの<span style="color:#F5F5F5;font-weight:600;">"意味"</span>を知り、<br>
+    <span style="color:#F5F5F5;font-weight:600;">"理論"</span>を理解した上で積み上げる。<br><br>
+    
+    だからこそ、<br>
+    人と決定的な"差"が生まれていく。<br><br>
+    
+    40代・50代の今だからこそ、<br>
+    "考えて積み重ねる強さ"を、<br>
+    技術に変えていきましょう。
+  </p>
+</section>
+
+<!-- ===== 流れ ===== -->
+<section class="section flow">
+  <div class="section-num">SECTION 08 / お申込みの流れ</div>
+  <h2 class="section-title">ご予約から<br>レッスンまで。</h2>
+  
+  <div class="flow-step">
+    <div class="flow-num">01</div>
+    <div class="flow-content">
+      <div class="flow-title">予約フォームから希望日時を選択</div>
+      <div class="flow-desc">9:00〜21:00開始の40分枠から選べます</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">02</div>
+    <div class="flow-content">
+      <div class="flow-title">公式LINEでご案内</div>
+      <div class="flow-desc">予約後、自動でLINEへご連絡が届きます</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">03</div>
+    <div class="flow-content">
+      <div class="flow-title">決済</div>
+      <div class="flow-desc">LINE内のリンクから安全にお支払い</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">04</div>
+    <div class="flow-content">
+      <div class="flow-title">Google Meet URLをお送りします</div>
+      <div class="flow-desc">決済確認後、公式LINEでお送りします</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">05</div>
+    <div class="flow-content">
+      <div class="flow-title">当日、40分間の個別レッスンへ</div>
+      <div class="flow-desc">あなただけの時間が始まります</div>
+    </div>
+  </div>
+  
+  <div style="max-width: 560px; margin: 24px auto 0; background: #1F2125; border: 1px dashed #5BB9CD; border-radius: 4px; padding: 16px 18px; text-align: center;">
+    <div style="color: #5BB9CD; font-size: 10px; letter-spacing: 0.2em; font-weight: 600; margin-bottom: 6px;">ご不明な点があれば</div>
+    <div style="color: #E0E0E0; font-size: 13px; line-height: 1.7;">
+      ご予約・レッスンに関するご質問は、<br>お気軽に<span style="color:#06C755;font-weight:600;">公式LINE</span>からご連絡ください。
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ===== ファイナルCTA ===== -->
+<section class="final-cta">
+  <h2>40代・50代の、<br>あなたへ。</h2>
+  <p class="final-cta-text">
+    "今からじゃ遅い"なんてことは、絶対にありません。<br>
+    むしろ、今のあなただからこそ辿り着ける<br><span style="color:#DB444C;font-weight:600;">"カッコよさ"</span>があります。<br><br>
+    理論を知り、納得し、自分の体で表現する。<br>
+    その喜びを、私と一緒に味わっていただけたら嬉しいです。
+  </p>
+  <a href="https://onebalanceyume-beep.github.io/on-lineBOXINGreservation/booking_v3.html" class="final-cta-btn">予約する →</a>
+  <div class="final-cta-limit">5名様限定 / お早めにどうぞ</div>
+</section>
+
+<!-- ===== フッター ===== -->
+<footer class="footer">
+  <div class="brand">ONE-BALANCE</div>
+  <div>ONLINE BOXING PERSONAL COACHING</div>
+</footer>
+
+<!-- ===== 右下常時表示の予約ボタン ===== -->
+<a href="https://onebalanceyume-beep.github.io/on-lineBOXINGreservation/booking_v3.html" class="floating-cta">予約する</a>
+
+<script>
+// キャッシュクリア
+if ('caches' in window) {
+  caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+}
+// ダブルタップズーム防止
+let lastTouch = 0;
+document.addEventListener('touchend', e => {
+  const now = Date.now();
+  if (now - lastTouch <= 300) e.preventDefault();
+  lastTouch = now;
+}, { passive: false });
+</script>
+
+</body>
+</html>
