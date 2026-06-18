@@ -146,11 +146,14 @@
 <script>
 // ====== 設定（GASをデプロイしたら GAS_URL を新URLに貼り替える）======
 const CONFIG = {
-  GAS_URL: 'ここに新しいGASのデプロイURLを貼り付け',
+  GAS_URL: 'https://script.google.com/macros/s/AKfycbxMj-rJWAsNiUr5XawVPkNdhHFnicHAtf24xTNhoVLjhTNZbj2OHo2b_gtUiyD5wXYp/exec',
   LINE_URL: 'https://lin.ee/xIshUR5',
   BASE_PAYMENT_URL: 'https://onebalance.shopselect.net/items/143522384',
-  HOUR_START: 9,
-  HOUR_END: 21,
+  START_MIN: 9*60,        // 受付開始 09:00
+  LAST_START_MIN: 20*60,  // 最終開始 20:00
+  STEP_MIN: 30,           // 30分刻み
+  BLOCK_MIN: 60,          // 1枠でカレンダー1時間確保
+  LESSON_MIN: 40,         // 実レッスン40分
   DAYS_AHEAD: 30,
 };
 // =================================================================
@@ -163,19 +166,20 @@ document.addEventListener('touchend',e=>{const now=Date.now(),tag=e.target.tagNa
 const DOW=['日','月','火','水','木','金','土'];
 const today=new Date();today.setHours(0,0,0,0);
 let view=new Date(today.getFullYear(),today.getMonth(),1);
-let busyMap={},bookedMap={},selDate=null,selHour=null;
+let occMap={},selDate=null,selStart=null;
 
 function fmtKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function pad(n){return String(n).padStart(2,'0');}
+function hhmm(min){return pad(Math.floor(min/60))+':'+pad(min%60);}
 function inRange(d){const diff=Math.round((d-today)/86400000);return diff>=1&&diff<=CONFIG.DAYS_AHEAD;}
-function isFull(key,h){return (busyMap[key]||[]).includes(h)||(bookedMap[key]||[]).includes(h);}
-function dayHasSlot(key){for(let h=CONFIG.HOUR_START;h<=CONFIG.HOUR_END;h++){if(!isFull(key,h))return true;}return false;}
+function isFull(key,start){const e=start+CONFIG.BLOCK_MIN;return (occMap[key]||[]).some(iv=>start<iv[1]&&iv[0]<e);}
+function dayHasSlot(key){for(let t=CONFIG.START_MIN;t<=CONFIG.LAST_START_MIN;t+=CONFIG.STEP_MIN){if(!isFull(key,t))return true;}return false;}
 
 async function init(){
   try{
     if(CONFIG.GAS_URL&&CONFIG.GAS_URL.indexOf('ここに')===-1){
       const res=await fetch(CONFIG.GAS_URL+'?action=getBusy&days='+CONFIG.DAYS_AHEAD,{method:'GET'});
-      const data=await res.json();busyMap=data.busy||{};bookedMap=data.booked||{};
+      const data=await res.json();occMap=data.occupied||{};
     }
   }catch(e){}
   renderCalShell();renderCal();
@@ -210,7 +214,7 @@ function renderCal(){
 }
 
 function pickDay(date,key,c){
-  selDate=key;selHour=null;
+  selDate=key;selStart=null;
   document.querySelectorAll('.cal-cell').forEach(x=>x.classList.remove('selected'));
   c.classList.add('selected');
   document.getElementById('dateLabel').textContent=(date.getMonth()+1)+'月'+date.getDate()+'日('+DOW[date.getDay()]+')';
@@ -222,11 +226,11 @@ function pickDay(date,key,c){
 
 function renderTimes(key){
   const g=document.getElementById('timeGrid');g.innerHTML='';
-  for(let h=CONFIG.HOUR_START;h<=CONFIG.HOUR_END;h++){
-    const full=isFull(key,h);
+  for(let t=CONFIG.START_MIN;t<=CONFIG.LAST_START_MIN;t+=CONFIG.STEP_MIN){
+    const full=isFull(key,t);
     const s=document.createElement('button');s.className='slot'+(full?' full':'');
-    s.innerHTML=pad(h)+':00'+(full?'<small>満員</small>':'');
-    if(!full)s.onclick=()=>{selHour=h;document.querySelectorAll('.slot').forEach(x=>x.classList.remove('on'));s.classList.add('on');};
+    s.innerHTML=hhmm(t)+(full?'<small>満員</small>':'');
+    if(!full)s.onclick=()=>{selStart=t;document.querySelectorAll('.slot').forEach(x=>x.classList.remove('on'));s.classList.add('on');};
     g.appendChild(s);
   }
 }
@@ -235,8 +239,8 @@ document.getElementById('back1').onclick=()=>{document.getElementById('timeCard'
 document.getElementById('back2').onclick=()=>{document.getElementById('formCard').classList.add('hidden');document.getElementById('timeCard').scrollIntoView({behavior:'smooth'});};
 
 document.getElementById('toForm').onclick=function(){
-  if(selHour===null){alert('時間を選んでください');return;}
-  document.getElementById('slotLabel').textContent=document.getElementById('dateLabel').textContent+' '+pad(selHour)+':00〜'+pad(selHour)+':40';
+  if(selStart===null){alert('時間を選んでください');return;}
+  document.getElementById('slotLabel').textContent=document.getElementById('dateLabel').textContent+' '+hhmm(selStart)+'〜'+hhmm(selStart+CONFIG.LESSON_MIN);
   document.getElementById('formCard').classList.remove('hidden');
   document.getElementById('formCard').scrollIntoView({behavior:'smooth',block:'start'});
 };
@@ -249,9 +253,9 @@ document.getElementById('submit').onclick=async function(){
   const err=document.getElementById('errMsg');err.textContent='';
   if(!name){err.textContent='お名前をご入力ください。';return;}
   if(!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){err.textContent='メールアドレスを正しくご入力ください。';return;}
-  if(!selDate||selHour===null){err.textContent='日時が選択されていません。';return;}
+  if(!selDate||selStart===null){err.textContent='日時が選択されていません。';return;}
   const btn=this;btn.disabled=true;btn.textContent='送信中…';
-  const params=new URLSearchParams({action:'book',date:selDate,hour:selHour,name:name,email:email,lineId:line,message:msg});
+  const params=new URLSearchParams({action:'book',date:selDate,start:selStart,name:name,email:email,lineId:line,message:msg});
   try{
     const res=await fetch(CONFIG.GAS_URL+'?'+params.toString(),{method:'GET'});
     const data=await res.json();
