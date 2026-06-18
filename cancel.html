@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>ご予約のキャンセル｜オンライン個別指導</title>
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" href="logo.png">
+<style>
+  :root{--red:#DB444C;--red-dark:#b93940;--blue:#5BB9CD;--pink:#fbeaec;--ink:#333;--muted:#8a8a8a;--line:#eee;--bg:#fafafa;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN",-apple-system,"BIZ UDPGothic","Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-text-size-adjust:100%;}
+  .wrap{max-width:460px;margin:0 auto;padding:0 0 60px;}
+  .header{background:linear-gradient(150deg,#DB444C,#c0343c);color:#fff;padding:30px 24px 34px;text-align:center;border-radius:0 0 32px 32px;}
+  .logo{width:80px;height:80px;margin:0 auto 10px;display:block;object-fit:contain;background:#fff;border-radius:20px;padding:8px;box-shadow:0 6px 18px rgba(0,0,0,.18);}
+  .header h1{font-size:18px;margin:0;font-weight:900;color:#fff;}
+  .card{background:#fff;margin:18px 16px;padding:24px;border-radius:16px;box-shadow:0 2px 14px rgba(0,0,0,.05);text-align:center;}
+  .info-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px;text-align:left;}
+  .info-row .k{color:var(--muted);font-size:12px;}
+  .info-row .v{font-weight:700;}
+  .selected-info{background:var(--pink);border-radius:12px;padding:14px;margin:10px 0 18px;font-size:15px;font-weight:700;color:var(--red);}
+  .btn{display:block;width:100%;border:none;border-radius:999px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:14px;text-decoration:none;text-align:center;}
+  .btn-danger{background:var(--red);color:#fff;}
+  .btn-danger:active{background:var(--red-dark);}
+  .btn-danger:disabled{background:#e7b8bb;}
+  .btn-ghost{background:#fff;color:var(--muted);border:2px solid var(--line);}
+  .btn-line{background:#06C755;color:#fff;}
+  .msg{font-size:14px;line-height:1.9;margin:10px 0;}
+  .loading{color:var(--muted);font-size:14px;padding:24px 0;}
+  .done-mark{width:60px;height:60px;border-radius:50%;background:var(--pink);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;}
+  .done-mark svg{width:30px;height:30px;}
+  .hidden{display:none;}
+  h2{font-size:17px;margin:6px 0 12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <img class="logo" src="logo.png" alt="ONE BALANCE BOXING">
+    <h1>ご予約のキャンセル</h1>
+  </div>
+
+  <div class="card" id="loadingCard">
+    <div class="loading">予約内容を読み込んでいます…</div>
+  </div>
+
+  <!-- 確認 -->
+  <div class="card hidden" id="confirmCard">
+    <h2>こちらの予約をキャンセルしますか？</h2>
+    <div class="selected-info" id="slotLabel"></div>
+    <div class="info-row"><span class="k">お名前</span><span class="v" id="nameV"></span></div>
+    <button class="btn btn-danger" id="cancelBtn">予約をキャンセルする</button>
+    <p class="msg" style="font-size:12px;color:var(--muted);margin-top:14px;">※ この操作は取り消せません。</p>
+  </div>
+
+  <!-- 完了 -->
+  <div class="card hidden" id="doneCard">
+    <div class="done-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#DB444C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <h2>キャンセルを承りました</h2>
+    <p class="msg" id="doneMsg"></p>
+    <a class="btn btn-line" id="lineBtn1" href="#" target="_blank" rel="noopener">公式LINEはこちら</a>
+  </div>
+
+  <!-- エラー / 締切超過 -->
+  <div class="card hidden" id="errorCard">
+    <h2 id="errTitle">ご確認ください</h2>
+    <p class="msg" id="errMsg"></p>
+    <a class="btn btn-line" id="lineBtn2" href="#" target="_blank" rel="noopener">公式LINEで連絡する</a>
+  </div>
+</div>
+
+<script>
+// ====== 設定（booking.html と同じGAS_URLを貼る）======
+const CONFIG = {
+  GAS_URL: 'ここに新しいGASのデプロイURLを貼り付け',
+  LINE_URL: 'https://lin.ee/xIshUR5',
+};
+// ====================================================
+
+if('caches' in window){ caches.keys().then(ks=>ks.forEach(k=>caches.delete(k))); }
+
+const token=new URLSearchParams(location.search).get('token');
+document.getElementById('lineBtn1').href=CONFIG.LINE_URL;
+document.getElementById('lineBtn2').href=CONFIG.LINE_URL;
+
+function show(id){['loadingCard','confirmCard','doneCard','errorCard'].forEach(c=>document.getElementById(c).classList.toggle('hidden',c!==id));}
+function showError(title,msg){document.getElementById('errTitle').textContent=title;document.getElementById('errMsg').textContent=msg;show('errorCard');}
+
+async function load(){
+  if(!token){ showError('リンクが正しくありません','お手数ですが、予約完了メールのキャンセルボタンからもう一度お試しください。'); return; }
+  if(CONFIG.GAS_URL.indexOf('ここに')!==-1){ showError('設定エラー','管理者へご連絡ください。'); return; }
+  try{
+    const res=await fetch(CONFIG.GAS_URL+'?action=getReservation&token='+encodeURIComponent(token),{method:'GET'});
+    const data=await res.json();
+    if(!data.success){ showError('予約が見つかりません',data.message||'すでにキャンセル済みの可能性があります。'); return; }
+    if(data.status==='キャンセル'){ showError('キャンセル済みです','こちらの予約はすでにキャンセルされています。'); return; }
+    document.getElementById('slotLabel').textContent=data.slotLabel;
+    document.getElementById('nameV').textContent=data.name+' 様';
+    show('confirmCard');
+  }catch(e){ showError('読み込みに失敗しました','時間をおいて再度お試しください。'); }
+}
+
+document.getElementById('cancelBtn').onclick=async function(){
+  const btn=this; btn.disabled=true; btn.textContent='処理中…';
+  try{
+    const res=await fetch(CONFIG.GAS_URL+'?action=cancel&token='+encodeURIComponent(token),{method:'GET'});
+    const data=await res.json();
+    if(data.success){
+      document.getElementById('doneMsg').innerHTML='下記の予約をキャンセルしました。<br><b>'+data.slotLabel+'</b><br><br>確認メールをお送りしました。';
+      show('doneCard');
+    }else if(data.deadline){
+      showError('キャンセル期限を過ぎています',data.message);
+    }else{
+      showError('キャンセルできませんでした',data.message||'お手数ですが公式LINEからご連絡ください。');
+    }
+  }catch(e){
+    btn.disabled=false; btn.textContent='予約をキャンセルする';
+    showError('通信に失敗しました','時間をおいて再度お試しください。');
+  }
+};
+
+load();
+</script>
+</body>
+</html>
